@@ -20,6 +20,21 @@
             font-size: 2em;
             font-family: 'Courier New', Courier, monospace;
         }
+        .nav {
+            display: flex;
+            justify-content: center;
+            background: #a38c67;
+            padding: 10px;
+        }
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+        }
+        .nav a:hover {
+            background: #8b6f4e;
+        }
         .container {
             max-width: 800px;
             margin: 40px auto;
@@ -29,61 +44,33 @@
             border-radius: 10px;
             text-align: center;
         }
-        .menu {
-            text-align: center;
-        }
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #ddd;
-            padding: 10px 0;
-        }
-        .button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #c2a477;
-            color: white;
-            text-decoration: none;
-            font-size: 1.2em;
-            border-radius: 5px;
-        }
-        .button:hover {
-            background-color: #a38c67;
-        }
         .footer {
             text-align: center;
             padding: 20px;
             background-color: #c2a477;
             color: white;
-            position: absolute;
+            position: relative;
             width: 100%;
-            bottom: 0;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="header">The Midnight Moon Cafe</div>
-    <div class="container">
-        <h2 class="menu">Menu</h2>
-        <div class="menu-item">
-            <span>Espresso</span>
-            <span>$3.00</span>
-        </div>
-        <div class="menu-item">
-            <span>Latte</span>
-            <span>$4.50</span>
-        </div>
-        <div class="menu-item">
-            <span>Cappuccino</span>
-            <span>$4.00</span>
-        </div>
-        <div class="menu-item">
-            <span>Mocha</span>
-            <span>$4.75</span>
-        </div>
-        <a href="https://discord.gg/zwQqrnmW8g" class="button" target="_blank">Join Discord</a>
+    
+    <!-- Navigation Menu -->
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="menu.html">Menu</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
     </div>
+
+    <div class="container">
+        <h2>Welcome to The Midnight Moon Cafe</h2>
+        <p>Your cozy spot for delicious coffee and warm conversations.</p>
+    </div>
+
     <div class="footer">© 2025 The Midnight Moon Cafe. All Rights Reserved.</div>
 </body>
 </html>
