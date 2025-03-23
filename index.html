@@ -6,52 +6,124 @@
     <title>Home - The Midnight Moon Cafe</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .buttons {
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5efe7;
+            color: #4a4a4a;
+        }
+        .header {
+            background-color: #c2a477;
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            position: relative;
+        }
+        .user-info {
+            position: absolute;
+            top: 15px;
+            right: 20px;
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white;
         }
         .button-box {
             display: inline-block;
-            padding: 15px 25px;
+            padding: 10px 20px;
             background-color: #c2a477;
             color: white;
-            font-size: 1.2em;
+            font-size: 1em;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 5px;
             transition: background 0.3s ease-in-out;
-            text-align: center;
         }
         .button-box:hover {
             background-color: #a38c67;
         }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <div class="header">The Midnight Moon Cafe</div>
-
-    <div class="nav">
-        <a href="index.html">Home</a>
-        <a href="menu.html">Menu</a>
-        <a href="about.html">About Us</a>
-        <a href="contact.html">Contact</a>
+    <div class="header">
+        The Midnight Moon Cafe
+        <div class="user-info">
+            <a href="https://discord.com/oauth2/authorize?client_id=1353300567442723009&redirect_uri=https://discord.com/oauth2/authorize?client_id=1353300567442723009&response_type=code&redirect_uri=https%3A%2F%2Fimurjace.github.io%2Fmidnight-moon-cafe%2Findex.html&scope=identify" 
+               class="button-box" id="login-btn">🔑 Sign in with Discord</a>
+            <div id="user-profile" style="display: none;">
+                <img id="user-avatar" src="" alt="Profile">
+                <span id="username"></span>
+                <a href="#" class="button-box" id="logout-btn">🚪 Log out</a>
+            </div>
+        </div>
     </div>
 
     <div class="container">
         <h2>Welcome to The Midnight Moon Cafe</h2>
         <p class="welcome-text">A cozy place where coffee meets comfort. Whether you're here for a quick espresso or a relaxing evening, we’ve got the perfect cup waiting for you.</p>
-        
-        <div class="buttons">
-            <a href="menu.html" class="button-box">☕ View Menu</a>
-            <a href="https://discord.gg/zwQqrnmW8g" class="button-box" target="_blank">💬 Join Discord</a>
-        </div>
-
-        <div class="buttons">
-            <a href="https://discord.com/oauth2/authorize?client_id=1353300567442723009&redirect_uri=https://discord.com/oauth2/authorize?client_id=1353300567442723009&response_type=code&redirect_uri=https%3A%2F%2Fimurjace.github.io%2Fmidnight-moon-cafe%2Findex.html&scope=identify" class="button-box">🔑 Sign in with Discord</a>
-        </div>
+        <a href="menu.html" class="button-box">☕ View Menu</a>
+        <a href="https://discord.gg/zwQqrnmW8g" class="button-box" target="_blank">💬 Join Discord</a>
     </div>
 
     <div class="footer">© 2025 The Midnight Moon Cafe. All Rights Reserved.</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loginBtn = document.getElementById("login-btn");
+            const logoutBtn = document.getElementById("logout-btn");
+            const userProfile = document.getElementById("user-profile");
+            const userAvatar = document.getElementById("user-avatar");
+            const username = document.getElementById("username");
+
+            // Check if user is already logged in
+            const fragment = new URLSearchParams(window.location.hash.slice(1));
+            const accessToken = fragment.get("access_token");
+
+            if (accessToken) {
+                fetch("https://discord.com/api/users/@me", {
+                    headers: { Authorization: `Bearer ${accessToken}` }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    loginBtn.style.display = "none";
+                    userProfile.style.display = "flex";
+                    username.textContent = data.username;
+                    userAvatar.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`;
+                    localStorage.setItem("discordUser", JSON.stringify(data)); // Save user info
+                });
+            }
+
+            logoutBtn.addEventListener("click", function() {
+                localStorage.removeItem("discordUser"); // Clear data
+                window.location.href = "index.html"; // Redirect to refresh page
+            });
+
+            // If user is already logged in from local storage
+            const savedUser = localStorage.getItem("discordUser");
+            if (savedUser) {
+                const data = JSON.parse(savedUser);
+                loginBtn.style.display = "none";
+                userProfile.style.display = "flex";
+                username.textContent = data.username;
+                userAvatar.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`;
+            }
+        });
+    </script>
 </body>
 </html>
