@@ -31,23 +31,31 @@
             gap: 10px;
         }
         .user-info img {
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             border: 2px solid white;
         }
         .button-box {
-            display: inline-block;
-            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
             background-color: #c2a477;
             color: white;
-            font-size: 1em;
+            font-size: 0.9em;
             text-decoration: none;
             border-radius: 5px;
             transition: background 0.3s ease-in-out;
+            border: none;
+            cursor: pointer;
         }
         .button-box:hover {
             background-color: #a38c67;
+        }
+        .discord-icon {
+            width: 18px;
+            height: 18px;
         }
         .container {
             max-width: 800px;
@@ -65,11 +73,14 @@
         The Midnight Moon Cafe
         <div class="user-info">
             <a href="https://discord.com/oauth2/authorize?client_id=1353300567442723009&redirect_uri=https://discord.com/oauth2/authorize?client_id=1353300567442723009&response_type=code&redirect_uri=https%3A%2F%2Fimurjace.github.io%2Fmidnight-moon-cafe%2Findex.html&scope=identify" 
-               class="button-box" id="login-btn">🔑 Sign in with Discord</a>
+               class="button-box" id="login-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/en/6/60/Discord_logo_2015.svg" class="discord-icon" alt="Discord">
+                Sign In
+            </a>
             <div id="user-profile" style="display: none;">
                 <img id="user-avatar" src="" alt="Profile">
                 <span id="username"></span>
-                <a href="#" class="button-box" id="logout-btn">🚪 Log out</a>
+                <button class="button-box" id="logout-btn">🚪 Log out</button>
             </div>
         </div>
     </div>
@@ -104,14 +115,18 @@
                     loginBtn.style.display = "none";
                     userProfile.style.display = "flex";
                     username.textContent = data.username;
-                    userAvatar.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`;
+                    userAvatar.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=40`;
                     localStorage.setItem("discordUser", JSON.stringify(data)); // Save user info
+                })
+                .catch(() => {
+                    localStorage.removeItem("discordUser");
+                    window.location.href = "index.html"; // Redirect if error
                 });
             }
 
             logoutBtn.addEventListener("click", function() {
                 localStorage.removeItem("discordUser"); // Clear data
-                window.location.href = "index.html"; // Redirect to refresh page
+                window.location.href = "index.html"; // Refresh page
             });
 
             // If user is already logged in from local storage
@@ -121,7 +136,7 @@
                 loginBtn.style.display = "none";
                 userProfile.style.display = "flex";
                 username.textContent = data.username;
-                userAvatar.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`;
+                userAvatar.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=40`;
             }
         });
     </script>
