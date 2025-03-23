@@ -66,6 +66,9 @@
             border-radius: 10px;
             text-align: center;
         }
+        #menu-section {
+            display: none; /* Initially hidden */
+        }
     </style>
 </head>
 <body>
@@ -88,7 +91,9 @@
     <div class="container">
         <h2>Welcome to The Midnight Moon Cafe</h2>
         <p class="welcome-text">A cozy place where coffee meets comfort. Whether you're here for a quick espresso or a relaxing evening, we’ve got the perfect cup waiting for you.</p>
-        <a href="menu.html" class="button-box">☕ View Menu</a>
+        <div id="menu-section">
+            <a href="menu.html" class="button-box">☕ View Menu</a>
+        </div>
         <a href="https://discord.gg/zwQqrnmW8g" class="button-box" target="_blank">💬 Join Discord</a>
     </div>
 
@@ -101,6 +106,7 @@
             const userProfile = document.getElementById("user-profile");
             const userAvatar = document.getElementById("user-avatar");
             const username = document.getElementById("username");
+            const menuSection = document.getElementById("menu-section");
 
             // Check if user is already logged in
             const fragment = new URLSearchParams(window.location.hash.slice(1));
@@ -117,6 +123,7 @@
                     username.textContent = data.username;
                     userAvatar.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=40`;
                     localStorage.setItem("discordUser", JSON.stringify(data)); // Save user info
+                    menuSection.style.display = "block"; // Show menu when logged in
                 })
                 .catch(() => {
                     localStorage.removeItem("discordUser");
@@ -137,6 +144,7 @@
                 userProfile.style.display = "flex";
                 username.textContent = data.username;
                 userAvatar.src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=40`;
+                menuSection.style.display = "block"; // Show menu when logged in
             }
         });
     </script>
