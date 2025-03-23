@@ -6,30 +6,71 @@
     <title>Menu - The Midnight Moon Cafe</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5efe7;
+            color: #4a4a4a;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: center;
-        }
-        th {
+        .header {
             background-color: #c2a477;
             color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 2em;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .nav {
+            text-align: center;
+            padding: 15px;
+            background-color: #e3c6a6;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #4a4a4a;
+            margin: 0 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .nav a:hover {
+            color: #a38c67;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        .category {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #c2a477;
+            margin-top: 20px;
+            border-bottom: 2px solid #c2a477;
+            padding-bottom: 5px;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
             font-size: 1.2em;
         }
-        td {
-            background: #fff;
-            font-size: 1.1em;
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #c2a477;
+            color: white;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="header">The Midnight Moon Cafe</div>
-    
+
     <div class="nav">
         <a href="index.html">Home</a>
         <a href="menu.html">Menu</a>
@@ -40,33 +81,43 @@
     <div class="container">
         <h2>Our Menu</h2>
 
-        <table>
-            <tr>
-                <th>Drink</th>
-                <th>Size</th>
-                <th>Price</th>
-            </tr>
-            <tr>
-                <td>Espresso</td>
-                <td>Small</td>
-                <td>$3.00</td>
-            </tr>
-            <tr>
-                <td>Latte</td>
-                <td>Medium</td>
-                <td>$4.50</td>
-            </tr>
-            <tr>
-                <td>Cappuccino</td>
-                <td>Large</td>
-                <td>$4.00</td>
-            </tr>
-            <tr>
-                <td>Mocha</td>
-                <td>Medium</td>
-                <td>$4.75</td>
-            </tr>
-        </table>
+        <!-- Drinks Section -->
+        <div class="category">Drinks</div>
+        <div class="menu-item">
+            <span>Espresso</span>
+            <span>$3.00</span>
+        </div>
+        <div class="menu-item">
+            <span>Latte</span>
+            <span>$4.50</span>
+        </div>
+        <div class="menu-item">
+            <span>Cappuccino</span>
+            <span>$4.00</span>
+        </div>
+        <div class="menu-item">
+            <span>Mocha</span>
+            <span>$4.75</span>
+        </div>
+
+        <!-- Pastries Section -->
+        <div class="category">Pastries</div>
+        <div class="menu-item">
+            <span>Chocolate Croissant</span>
+            <span>$3.50</span>
+        </div>
+        <div class="menu-item">
+            <span>Blueberry Muffin</span>
+            <span>$3.75</span>
+        </div>
+        <div class="menu-item">
+            <span>Cheesecake Slice</span>
+            <span>$5.00</span>
+        </div>
+        <div class="menu-item">
+            <span>Cinnamon Roll</span>
+            <span>$4.25</span>
+        </div>
     </div>
 
     <div class="footer">© 2025 The Midnight Moon Cafe. All Rights Reserved.</div>
